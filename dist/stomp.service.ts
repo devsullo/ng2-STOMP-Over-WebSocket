@@ -110,12 +110,12 @@ export class StompService {
 	/**
 	 * Unsuccessfull connection to server
 	 */
-	public onError = (error: string ) => {
+	public onError = (frame: any ) => {
 
-	  console.error(`Error: ${error}`);
+	  console.error(`Error: ${frame.error}`);
 
 	  // Check error and try reconnect
-	  if (error.indexOf('Lost connection') !== -1) {
+	  if (frame.error.indexOf('Lost connection') !== -1) {
 	    if(this.config.debug){
 	    	console.log('Reconnecting...');
 	    }
