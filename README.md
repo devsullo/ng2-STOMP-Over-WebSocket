@@ -2,16 +2,16 @@
 STOMP Over WebSocket service for angular2
 
 
-##Installation
+## 3 step of installation
 
 1) npm i stompjs
 2) npm i sockjs-client
 3) npm i ng2-stomp-service
 
 
-##Usage
+## Usage example
 
-###In -> app.module.ts
+### In -> app.module.ts
 
 ```javascript
 import { StompService } from 'ng2-stomp-service';
@@ -22,7 +22,7 @@ import { StompService } from 'ng2-stomp-service';
 })
 ```
 
-###In -> app.components.ts
+### In -> app.components.ts
 
 ```javascript
 import { StompService } from 'ng2-stomp-service';
@@ -41,10 +41,16 @@ constructor(stomp: StompService) {
     console.log('connected');
     
     //subscribe
-    stomp.subscribe('destination', this.response);
+    stomp.subscribe('/destination', this.response});
     
     //send message
     stomp.send('destionation',{"data":"data"});
+    
+    //disconnect
+    stomp.disconnect().then(() => {
+      console.log( 'Connection closed' )
+    })
+    
   });
  
 
