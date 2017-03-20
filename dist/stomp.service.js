@@ -26,9 +26,9 @@ var StompService = (function () {
          * Unsuccessfull connection to server
          */
         this.onError = function (frame) {
-            console.error("Error: " + frame.error);
+            console.error("Error: " + frame.body);
             // Check error and try reconnect
-            if (frame.error.indexOf('Lost connection') !== -1) {
+            if (frame.body.indexOf('Lost connection') !== -1) {
                 if (_this.config.debug) {
                     console.log('Reconnecting...');
                 }
