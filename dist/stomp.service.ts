@@ -39,6 +39,9 @@ export class StompService {
 	private disconnectPromise: any;
 	private resolveDisConPromise: (...args: any[]) => void;
 
+	private defaultHeartbeatIn = 10000;
+	private defaultHeartbeatOut = 10000;
+
 	public status: string;
 
 
@@ -79,8 +82,8 @@ export class StompService {
 		this.socket = new SockJS(this.config.host);
 		this.stomp = Stomp.over(this.socket);
 
-		this.stomp.heartbeat.outgoing = this.config.heartbeatOut;
-		this.stomp.heartbeat.incoming = this.config.heartbeatIn;
+		this.stomp.heartbeat.outgoing = this.config.heartbeatOut || this.defaultHeartbeatOut;
+		this.stomp.heartbeat.incoming = this.config.heartbeatIn || this.defaultHeartbeatIn;
 
 		//Debuging connection
 		if(this.config.debug){
@@ -91,7 +94,7 @@ export class StompService {
 			this.stomp.debug = false;
 		}
 		//Connect to server
-		this.stomp.connect(this.config.headers, this.onConnect,this.onError);
+		this.stomp.connect(this.config.headers || {}, this.onConnect,this.onError);
 		return this.connectionPromise;
 		
 	}
