@@ -13,6 +13,8 @@ var StompService = (function () {
     function StompService() {
         var _this = this;
         this.config = null;
+        this.defaultHeartbeatIn = 10000;
+        this.defaultHeartbeatOut = 10000;
         /**
          * Successfull connection to server
          */
@@ -59,8 +61,8 @@ var StompService = (function () {
         //Prepare Client
         this.socket = new SockJS(this.config.host);
         this.stomp = Stomp.over(this.socket);
-        this.stomp.heartbeat.outgoing = this.config.heartbeatOut;
-        this.stomp.heartbeat.incoming = this.config.heartbeatIn;
+        this.stomp.heartbeat.outgoing = this.config.heartbeatOut || this.defaultHeartbeatOut;
+        this.stomp.heartbeat.incoming = this.config.heartbeatIn || this.defaultHeartbeatIn;
         //Debuging connection
         if (this.config.debug) {
             this.stomp.debug = function (str) {
@@ -71,7 +73,7 @@ var StompService = (function () {
             this.stomp.debug = false;
         }
         //Connect to server
-        this.stomp.connect(this.config.headers, this.onConnect, this.onError);
+        this.stomp.connect(this.config.headers || {}, this.onConnect, this.onError);
         return this.connectionPromise;
     };
     /**
