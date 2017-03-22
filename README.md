@@ -1,15 +1,27 @@
 # ng2-STOMP-Over-WebSocket
 STOMP Over WebSocket service for angular2
 
+typings.d.ts add this
+
+declare module 'stompjs';
+declare module 'sockjs-client';
 
 ## 3 step of installation
 
-1) npm i stompjs
-2) npm i sockjs-client
-3) npm i ng2-stomp-service
+1) npm i --save stompjs
+2) npm i --save sockjs-client
+3) npm i --save ng2-stomp-service
 
 
 ## Example of Usage
+
+### In -> typings.d.ts
+Add `stompjs` and `sockjs-client` module declaration
+
+```javascript
+declare module 'stompjs';
+declare module 'sockjs-client';
+```
 
 ### In -> app.module.ts
 
@@ -59,7 +71,7 @@ constructor(stomp: StompService) {
      * @param {Function} callback(message,headers): called after server response.
      * @param {object} headers: optional headers.
      */
-    stomp.subscribe('/destination', this.response});
+    this.subscription = stomp.subscribe('/destination', this.response});
     
     /**
      * Send message.
