@@ -1,11 +1,6 @@
 # ng2-STOMP-Over-WebSocket
 STOMP Over WebSocket service for angular2
 
-typings.d.ts add this
-
-declare module 'stompjs';
-declare module 'sockjs-client';
-
 ## 3 step of installation
 
 1) npm i --save stompjs
