@@ -43,7 +43,7 @@ export class StompService {
 
 
 	constructor() {
-		
+
 		this.status = 'CLOSED';
 
 		//Create promises
@@ -90,6 +90,9 @@ export class StompService {
 		}else{
 			this.stomp.debug = false;
 		}
+
+		this.config.headers = this.config.headers || {};
+
 		//Connect to server
 		this.stomp.connect(this.config.headers, this.onConnect,this.onError);
 		return this.connectionPromise;
