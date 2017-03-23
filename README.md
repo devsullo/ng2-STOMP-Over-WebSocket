@@ -1,6 +1,9 @@
 # ng2-STOMP-Over-WebSocket
 STOMP Over WebSocket service for angular2
 
+[Website](http://devsullo.com/github/angular2-stomp-over-websocket-service/) 
+
+
 ## 3 step of installation
 
 1) npm i --save stompjs
@@ -35,7 +38,8 @@ import { StompService } from 'ng2-stomp-service';
 import { StompService } from 'ng2-stomp-service';
 
 private wsConf = {
-  host:'test.com'
+  host:'test.com',
+  debug:true
 }
 private subscription : any;
 

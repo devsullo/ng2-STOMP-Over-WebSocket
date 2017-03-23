@@ -1,6 +1,6 @@
 {
   "name": "ng2-stomp-service",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "STOMP Over WebSocket service for angular2",
   "main": "index.js",
   "scripts": {
@@ -12,10 +12,14 @@
   },
   "keywords": [
     "stomp",
-    "websoket",
+    "websockets",
+    "socket",
     "sockjs",
+    "sockjs-client",
     "angular2",
-    "service"
+    "angular 2",
+    "service",
+    "ng2"
   ],
   "author": "Lasha Sulaberidze",
   "license": "MIT",

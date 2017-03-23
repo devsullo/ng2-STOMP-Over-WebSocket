@@ -22,6 +22,7 @@ interface Config {
 
 }
 
+
 @Injectable()
 export class StompService {
 
@@ -38,9 +39,6 @@ export class StompService {
 
 	private disconnectPromise: any;
 	private resolveDisConPromise: (...args: any[]) => void;
-
-	private defaultHeartbeatIn = 10000;
-	private defaultHeartbeatOut = 10000;
 
 	public status: string;
 
@@ -82,8 +80,8 @@ export class StompService {
 		this.socket = new SockJS(this.config.host);
 		this.stomp = Stomp.over(this.socket);
 
-		this.stomp.heartbeat.outgoing = this.config.heartbeatOut || this.defaultHeartbeatOut;
-		this.stomp.heartbeat.incoming = this.config.heartbeatIn || this.defaultHeartbeatIn;
+		this.stomp.heartbeat.outgoing = this.config.heartbeatOut || 10000;
+		this.stomp.heartbeat.incoming = this.config.heartbeatIn || 10000;
 
 		//Debuging connection
 		if(this.config.debug){
@@ -93,8 +91,6 @@ export class StompService {
 		}else{
 			this.stomp.debug = false;
 		}
-
-		this.config.headers = this.config.headers || {};
 
 		//Connect to server
 		this.stomp.connect(this.config.headers || {}, this.onConnect,this.onError);
@@ -116,18 +112,18 @@ export class StompService {
 	/**
 	 * Unsuccessfull connection to server
 	 */
-	public onError = (frame: any ) => {
+	public onError = (error: string ) => {
 
-	  console.error(`Error: ${frame.body}`);
+	  console.error(`Error: ${error}`);
 
 	  // Check error and try reconnect
-	  if (frame.body.indexOf('Lost connection') !== -1) {
+	  if (error.indexOf('Lost connection') !== -1) {
 	    if(this.config.debug){
 	    	console.log('Reconnecting...');
 	    }
 	    this.timer = setTimeout(() => {
 	     	this.startConnect();
-	    }, this.config.recTimeout);
+	    }, this.config.recTimeout || 5000);
 	  }
 	}
 

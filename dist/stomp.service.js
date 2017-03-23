@@ -13,8 +13,6 @@ var StompService = (function () {
     function StompService() {
         var _this = this;
         this.config = null;
-        this.defaultHeartbeatIn = 10000;
-        this.defaultHeartbeatOut = 10000;
         /**
          * Successfull connection to server
          */
@@ -27,16 +25,16 @@ var StompService = (function () {
         /**
          * Unsuccessfull connection to server
          */
-        this.onError = function (frame) {
-            console.error("Error: " + frame.body);
+        this.onError = function (error) {
+            console.error("Error: " + error);
             // Check error and try reconnect
-            if (frame.body.indexOf('Lost connection') !== -1) {
+            if (error.indexOf('Lost connection') !== -1) {
                 if (_this.config.debug) {
                     console.log('Reconnecting...');
                 }
                 _this.timer = setTimeout(function () {
                     _this.startConnect();
-                }, _this.config.recTimeout);
+                }, _this.config.recTimeout || 5000);
             }
         };
         this.status = 'CLOSED';
@@ -61,8 +59,8 @@ var StompService = (function () {
         //Prepare Client
         this.socket = new SockJS(this.config.host);
         this.stomp = Stomp.over(this.socket);
-        this.stomp.heartbeat.outgoing = this.config.heartbeatOut || this.defaultHeartbeatOut;
-        this.stomp.heartbeat.incoming = this.config.heartbeatIn || this.defaultHeartbeatIn;
+        this.stomp.heartbeat.outgoing = this.config.heartbeatOut || 10000;
+        this.stomp.heartbeat.incoming = this.config.heartbeatIn || 10000;
         //Debuging connection
         if (this.config.debug) {
             this.stomp.debug = function (str) {
@@ -72,7 +70,6 @@ var StompService = (function () {
         else {
             this.stomp.debug = false;
         }
-        this.config.headers = this.config.headers || {};
         //Connect to server
         this.stomp.connect(this.config.headers || {}, this.onConnect, this.onError);
         return this.connectionPromise;
