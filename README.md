@@ -6,9 +6,9 @@ STOMP Over WebSocket service for angular2
 
 ## 3 step of installation
 
-1) npm i --save stompjs
-2) npm i --save sockjs-client
-3) npm i --save ng2-stomp-service
+1) `npm i --save stompjs`
+2) `npm i --save sockjs-client`
+3) `npm i --save ng2-stomp-service`
 
 
 ## Example of Usage
