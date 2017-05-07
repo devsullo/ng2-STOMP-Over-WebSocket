@@ -83,7 +83,7 @@ public response = (data) => {
 
 ## The Queue
 
-When your application is going to scale the 'fast usage example' in not for you.. but it's helpful for beginning.
+When your application is going to scale the 'fast usage example' is not for you.. but it's helpful for beginning.
 
 When you have routes and different actions in your application you will need to use 'queue' of subscriptions with ```after() ``` and ```done()``` methods.
 
@@ -104,7 +104,7 @@ When connection established we have to call ```done()``` methdod with 'init' par
  })
 ```
 
-Now we can use ```after() ``` method in different components and classes. Which checks continuously if specified queue done.
+Now we can use ```after() ``` method in different components and classes. Which checks continuously if specified queue have been done.
 ```javascript
   stomp.after('init').then(()=>{
     stomp.subscribe('user',(data)=>{
