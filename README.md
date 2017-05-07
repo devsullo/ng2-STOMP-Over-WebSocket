@@ -195,3 +195,5 @@ As you can see we subscribed 'user' destination when 'init' queue has been compl
   stomp.pending()
 
 ```
+
+Any question? use my [web page](http://devsullo.com/github/angular2-stomp-over-websocket-service/) 
