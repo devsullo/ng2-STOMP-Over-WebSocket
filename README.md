@@ -125,7 +125,7 @@ As you can see we subscribed 'user' destination when 'init' queue has been compl
 
 
 ## Methods
-```
+```javascript
   /**
    * Stomp configuration.
    * @param {object} config: a configuration object.
@@ -174,22 +174,22 @@ As you can see we subscribed 'user' destination when 'init' queue has been compl
   stomp.disconnect()
   
   /**
-	 * After specified subscription queue.
+   * After specified subscription queue.
    * @param {string} name: queue name.
    * @return {Promise} if resolved
-	 */
+   */
   stomp.after()
   
   /**
-	 * Done specified subscription queue.
+   * Done specified subscription queue.
    * @param {string} name: queue name.
-	 */
+   */
   stomp.done()
   
   /**
-	 * Turn specified subscription queue on pending mode
+   * Turn specified subscription queue on pending mode
    * @param {string} name: queue name.
-	 */
+   */
   stomp.pending()
 
 ```
