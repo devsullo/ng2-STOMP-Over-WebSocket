@@ -1,6 +1,8 @@
 # ng2-STOMP-Over-WebSocket
 STOMP Over WebSocket service for angular2
 
+Competible with: angular4 and ionic3
+
 [Website](http://devsullo.com/github/angular2-stomp-over-websocket-service/) 
 
 
