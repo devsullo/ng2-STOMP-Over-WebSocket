@@ -125,7 +125,10 @@ var StompService = (function () {
                 return false;
             }
         }, this.config.queueCheckTime || 100);
-        return new Promise(function (resolve, reject) { return _this.queuePromises[name] = resolve; });
+        if (!this.queuePromises[name + 'promice']) {
+            this.queuePromises[name + 'promice'] = new Promise(function (resolve, reject) { return _this.queuePromises[name] = resolve; });
+        }
+        return this.queuePromises[name + 'promice'];
     };
     /**
      * Done specified subscription

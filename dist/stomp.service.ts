@@ -163,6 +163,7 @@ export class StompService {
 	}
 
 
+
 	/**
 	 * After specified subscription
 	 */
@@ -177,10 +178,13 @@ export class StompService {
       	return false;
       }
 		},this.config.queueCheckTime || 100);
-		return new Promise(
-	 	  (resolve, reject) => this.queuePromises[name] = resolve
-	 	);
 
+		if(!this.queuePromises[name+'promice']){
+			this.queuePromises[name+'promice'] = new Promise(
+	 	  	(resolve, reject) => this.queuePromises[name] = resolve
+	 		);
+		}
+		return this.queuePromises[name+'promice'];
 	}
 
 
@@ -212,6 +216,4 @@ export class StompService {
 		}
 	}
 
-
 }
-
