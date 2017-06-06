@@ -56,7 +56,7 @@ constructor(stomp: StompService) {
     console.log('connected');
     
     //subscribe
-    this.subscription = stomp.subscribe('/destination', this.response});
+    this.subscription = stomp.subscribe('/destination', this.response);
     
     //send data
     stomp.send('destionation',{"data":"data"});
